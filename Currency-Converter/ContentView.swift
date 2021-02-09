@@ -61,12 +61,11 @@ struct ContentView: View {
                     }//ForeEach
 //                    .onDelete(perform:delete)
                 }//List
+                .onAppear(perform:loadCurrencies)
                 .navigationBarTitle("Currenceis",displayMode: .inline)
                     
                 }//NavigationView
-                .onAppear(perform: {
-                    //loadcurrencyをする
-                })
+            
                 VStack{
                     NavigationLink(destination: AddCurrecyView().environmentObject(self.userData)){
                         Image(systemName: "i.circle").font(.system(size: 40, weight: .medium)).foregroundColor(Color(.systemOrange))
@@ -78,17 +77,77 @@ struct ContentView: View {
             .onTapGesture{
                 UIApplication.shared.closeKeyboard()
             }
-        }//ZStack
+    }//ZStack
     }
+    
+    private func loadCurrencies(){
+        let url = URL(string: "https://api.exchangeratesapi.io/latest?base=USD")!
+        
+        let task = URLSession.shared.dataTask(with: url , completionHandler: { data, _, _ in
+            if let data = data {
+                if let decoded:CurrencyList = self.decodeData(CurrencyList.self,data){
+                    self.lastUpdated = decoded.date
+                    
+                    var newCurrencies = [Currency]()
+                    for key in decoded.rates.keys{
+                    var newCurrency = Currency(name: supportedCurrencies[key]?[0] ?? "Unknown",
+                                               rate: 1.0/(decoded.rates[key] ?? 1.0), symbol: supportedCurrencies[key]?[1] ?? "",code: key)
+                        newCurrencies.append(newCurrency)
+                }//for key in decoded.rates.keys
+                    
+                    DispatchQueue.main.async {
+                        self.userData.allCurrencies = newCurrencies
+                        
+                        if let base = self.userData.allCurrencies.filter({
+                            $0.symbol == self.userData.baseCurrencies.symbol
+                        })//filter
+                        .first{
+                            self.userData.baseCurrencies = base
+                        }//first
+                        
+                        var tempNewUserCurrency = [Currency]()
+                        let userCurrencies = self.userData.userCurrencies.map{$0.code}
+                        for c in self.userData.allCurrencies{
+                            if userCurrencies.contains(c.code){
+                                tempNewUserCurrency.append(c)
+                            }//if
+                        }//for c in self.userData.allCurrencies
+                        
+                        self.userData.userCurrencies = tempNewUserCurrency
+                    }//Dispatch
+                    
+                }//if let decoded:CurrencyList
+            }//data
+        }//completionHandler
+        )//URLSession.shared.dataTask
+        task.resume()
+    }//loadCurrencies
     
     func delete(at offsets:IndexSet){
         userData.userCurrencies.remove(atOffsets: offsets)
     }
+    
+    
 }
 
-private func loadCurrencies(){
-    
-}//loadCurrencies
+extension ContentView
+{
+    private func decodeData<T>(_ decodeObject:T.Type,_ data:Data) -> T? where T:Codable
+    {
+        let decoder = JSONDecoder()
+        do
+        {
+            print("success")
+            return try decoder.decode(decodeObject.self, from: data)
+            
+        }//do
+        catch let jsonErr
+        {
+            print("Error decoding Json",jsonErr)
+            return nil
+        }//catch
+    }//decodeData
+}//extension
 
 extension UIApplication {
     func closeKeyboard() {
@@ -99,6 +158,6 @@ extension UIApplication {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(UserData())
     }
 }

@@ -12,7 +12,6 @@ import Combine
 private let defaultCurrencies:[Currency] = [
     Currency(name:"US doller",rate:1.0,symbol: "US",code: "USD"),
     Currency(name:"Canadian doller",rate:1.0,symbol: "CA",code: "CAD")
-    
 ]
 
 @propertyWrapper

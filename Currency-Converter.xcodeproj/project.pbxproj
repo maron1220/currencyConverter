@@ -19,6 +19,7 @@
 		2DAC7C9B25D243B900CCB754 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC7C9A25D243B900CCB754 /* CurrencyData.swift */; };
 		2DAC7CA025D2B39C00CCB754 /* CurrentryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC7C9F25D2B39C00CCB754 /* CurrentryItemView.swift */; };
 		2DAC7CA525D2C76600CCB754 /* AddCurrecyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC7CA425D2C76600CCB754 /* AddCurrecyView.swift */; };
+		2DAC7CAA25D2F0B800CCB754 /* CurrencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC7CA925D2F0B800CCB754 /* CurrencyList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		2DAC7C9A25D243B900CCB754 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		2DAC7C9F25D2B39C00CCB754 /* CurrentryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentryItemView.swift; sourceTree = "<group>"; };
 		2DAC7CA425D2C76600CCB754 /* AddCurrecyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCurrecyView.swift; sourceTree = "<group>"; };
+		2DAC7CA925D2F0B800CCB754 /* CurrencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				2DAC7C6225D2424400CCB754 /* AppDelegate.swift */,
 				2DAC7C6425D2424400CCB754 /* SceneDelegate.swift */,
 				2DAC7C6625D2424400CCB754 /* ContentView.swift */,
+				2DAC7CA925D2F0B800CCB754 /* CurrencyList.swift */,
 				2DAC7CA425D2C76600CCB754 /* AddCurrecyView.swift */,
 				2DAC7C9F25D2B39C00CCB754 /* CurrentryItemView.swift */,
 				2DAC7C9525D2432C00CCB754 /* UserData.swift */,
@@ -282,6 +285,7 @@
 				2DAC7C6525D2424400CCB754 /* SceneDelegate.swift in Sources */,
 				2DAC7CA025D2B39C00CCB754 /* CurrentryItemView.swift in Sources */,
 				2DAC7CA525D2C76600CCB754 /* AddCurrecyView.swift in Sources */,
+				2DAC7CAA25D2F0B800CCB754 /* CurrencyList.swift in Sources */,
 				2DAC7C9625D2432C00CCB754 /* UserData.swift in Sources */,
 				2DAC7C9B25D243B900CCB754 /* CurrencyData.swift in Sources */,
 				2DAC7C6725D2424400CCB754 /* ContentView.swift in Sources */,
