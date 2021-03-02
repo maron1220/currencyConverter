@@ -23,13 +23,14 @@ struct ContentView: View {
                 Text("From").fontWeight(.bold).foregroundColor(.gray)
                 HStack{
                     Text("\(userData.baseCurrencies.flag)").padding(5)
-                    VStack(alignment: .leading){
+                    VStack(alignment: .center){
                         Text(userData.baseCurrencies.code).foregroundColor(.white)
                         Text(userData.baseCurrencies.name).foregroundColor(.white)
                     }//VSTack
                     
                     Spacer()
                     TextField("1.0",text:$baseAmount).foregroundColor(.white)
+                        .multilineTextAlignment(.center)
                         .keyboardType(.decimalPad)
                         .frame(width:UIScreen.main.bounds.width/2)
                         .background(
@@ -55,14 +56,14 @@ struct ContentView: View {
                     ForEach(userData.userCurrencies){ currency in
                         //CurrencyItemを入れる
                         CurrentryItemView(currency: currency, baseAmount: doubleValue)
-                            .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-                                self.userData.baseCurrencies = currency
-                            })//onTapGesture
+//                            .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+//                                self.userData.baseCurrencies = currency
+//                            })//onTapGesture
                     }//ForeEach
 //                    .onDelete(perform:delete)
                 }//List
                 .onAppear(perform:loadCurrencies)
-                .navigationBarTitle("Currenceis",displayMode: .inline)
+                .navigationBarTitle("外貨レート",displayMode: .inline)
                     
                 }//NavigationView
             
@@ -81,7 +82,7 @@ struct ContentView: View {
     }
     
     private func loadCurrencies(){
-        let url = URL(string: "https://api.exchangeratesapi.io/latest?base=USD")!
+        let url = URL(string: "https://api.exchangeratesapi.io/latest?base=JPY")!
         
         let task = URLSession.shared.dataTask(with: url , completionHandler: { data, _, _ in
             if let data = data {

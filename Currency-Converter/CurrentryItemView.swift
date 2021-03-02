@@ -38,7 +38,7 @@ struct CurrentryItemView: View {
                 Text(currency.name).font(.footnote).foregroundColor(.gray)
             }//VStack
             Spacer()
-            VStack(alignment: .leading){
+            VStack(alignment: .trailing){
                 Text("\(totalAmount)")
                 Text("1\(currency.code) = \(converstionRate)\(userData.baseCurrencies.code)").foregroundColor(.gray)
             }//VStack
