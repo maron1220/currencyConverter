@@ -7,6 +7,21 @@
 
 import Foundation
 import SwiftUI
+import GoogleMobileAds
+
+struct AdView: UIViewRepresentable {
+    func makeUIView(context: Context) -> GADBannerView {
+        let banner = GADBannerView(adSize: kGADAdSizeBanner)
+        // 以下は、バナー広告向けのテスト専用広告ユニットIDです。自身の広告ユニットIDと置き換えてください。
+        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        banner.rootViewController = UIApplication.shared.windows.first?.rootViewController
+        banner.load(GADRequest())
+        return banner
+    }
+
+    func updateUIView(_ uiView: GADBannerView, context: Context) {
+    }
+}
 
 struct ContentView: View {
     @EnvironmentObject var userData:UserData
@@ -20,6 +35,7 @@ struct ContentView: View {
         
         ZStack(alignment: .bottomTrailing){
             VStack{
+                UpperAdsView()
                 Text("From").fontWeight(.bold).foregroundColor(.gray)
                 HStack{
                     Text("\(userData.baseCurrencies.flag)").padding(5)
@@ -74,6 +90,7 @@ struct ContentView: View {
                     .frame(width: 46, height: 46, alignment: .center)
                 Text("Last updated:\(self.lastUpdated)").foregroundColor(.gray).bold()
                 }//VStack
+                LowerAdsView()
             }//VStack
             .onTapGesture{
                 UIApplication.shared.closeKeyboard()
